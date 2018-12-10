@@ -3,18 +3,12 @@ package Daftar;
 import Koneksi.Koneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.JFrame;
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
 
 public class Daftar extends javax.swing.JFrame {
 
@@ -354,16 +348,6 @@ public class Daftar extends javax.swing.JFrame {
             for (int i = 0; i < data.size(); i++) {
                 stat.setString(i + 1, data.get(i));
             }
-
-//            stat.setString(1, identitas.getText());
-//            stat.setString(2, nama.getText());
-//            stat.setString(3, alamat.getText());
-//            stat.setString(4, jeniskelamin.getText());
-//            stat.setString(5, email.getText());
-//            stat.setString(6, tempatlahir.getText());
-//            stat.setString(7, tanggallahir.getText());
-//            stat.setString(8, lulusan.getText());
-//            stat.setString(9, notelp.getText());
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "DATA BERHASIL DISIMPAN");
             kosong();
@@ -421,23 +405,13 @@ public class Daftar extends javax.swing.JFrame {
         tanggallahir.setText(g);
         lulusan.setText(h);
         notelp.setText(i);
-
-
     }//GEN-LAST:event_tabeldaftarMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-        try{
-            String sql = "update profil set nama=?, alamat=?, jeniskelamin=?, email=?, tempatlahir=?, tanggallahir=?, lulusan=?, notelp=? where id='"+identitas.getText()+"'";
+        try {
+            String sql = "update profil set nama=?, alamat=?, jeniskelamin=?, email=?, tempatlahir=?, tanggallahir=?, lulusan=?, notelp=? where id='" + identitas.getText() + "'";
             data.clear();
             PreparedStatement stat = conn.prepareStatement(sql);
-            //stat.setString(1, nama.getText());
-            //stat.setString(2, alamat.getText());
-            //stat.setString(3, kel.getText());
-            //stat.setString(4, email.getText());
-            //stat.setString(5, tempatlahir.getText());
-            //stat.setString(6, tanggallahir.getText());
-            //stat.setString(7, lulusan.getText());
-            //stat.setString(8, notelp.getText());
             data.add(nama.getText());
             data.add(alamat.getText());
             data.add(kel);
@@ -454,24 +428,24 @@ public class Daftar extends javax.swing.JFrame {
             kosong();
             identitas.requestFocus();
             datatable();
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "DATA GAGAL DIEDIT "+e);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "DATA GAGAL DIEDIT " + e);
         }
     }//GEN-LAST:event_editActionPerformed
 
     private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
-        int ok = JOptionPane.showConfirmDialog(null, "YAKIN MAU HAPUS?","PESAN KONFIRMASI",JOptionPane.YES_NO_CANCEL_OPTION);
-        if(ok==0){
-            String sql = "delete from profil where id = '"+identitas.getText()+"'";
-            try{
+        int ok = JOptionPane.showConfirmDialog(null, "YAKIN MAU HAPUS?", "PESAN KONFIRMASI", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ok == 0) {
+            String sql = "delete from profil where id = '" + identitas.getText() + "'";
+            try {
                 PreparedStatement stat = conn.prepareStatement(sql);
                 stat.executeUpdate();
                 JOptionPane.showMessageDialog(null, "DATA BERHASIL DIHAPUS");
                 kosong();
                 identitas.requestFocus();
                 datatable();
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "DATA GAGAL DIHAPUS "+e);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "DATA GAGAL DIHAPUS " + e);
             }
         }
     }//GEN-LAST:event_hapusActionPerformed
